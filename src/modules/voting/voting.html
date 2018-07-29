@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <h1 class="text-center">Example Voting System dapp</h1>
+    </div>
+</div>
+
+<hr/>
+<br/>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="input-group">
+            <input type="text" class="form-control input-value" name="input" placeholder="New proposal..." value="" ng-model="proposal.name">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default btn-value" ng-click="onClickNewProposal()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr/>
+<br/>
+
+</div>
+
+    <div class="panel panel-default" ng-repeat="p in proposals">
+        <div class="panel-heading">
+                <h3 class="panel-title">{{p.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-12">
+                
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Approve vote:
+                            <span class="numVotesPos">{{p.numPos}}</span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-primary btn-vote" ng-click="onClickVote( p, 1 )">Approve</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Against votes:
+                            <span class="numVotesNeg">{{p.numNeg}}</span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-danger btn-vote"  ng-click="onClickVote( p, 2 )">Against</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>Abstence votes:
+                            <span class="numVotesAbs">{{p.numAbs}}</span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-warning btn-vote"  ng-click="onClickVote( p, 3 )">Abstence</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<br/>
+
+<pre>{{proposals | json}}</pre>
