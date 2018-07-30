@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.24;
 
 
 contract Voting {
@@ -35,7 +35,7 @@ contract Voting {
 
     function addProposal(string title) public returns (bool) {
         Proposal memory proposal;
-        CreatedProposalEvent();
+        emit CreatedProposalEvent();
         proposal.title = title;
         proposals.push(proposal);
         return true;
@@ -55,7 +55,7 @@ contract Voting {
             p.voters[msg.sender].value = voteValue;
             p.voters[msg.sender].voted = true;
             p.votersAddress.push(msg.sender);
-            CreatedVoteEvent();
+            emit CreatedVoteEvent();
             return true;
         } else {
             return false;
