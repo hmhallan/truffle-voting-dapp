@@ -6,7 +6,8 @@ contract('Voting', function(accounts) {
 
     return Voting.deployed().then(function(instance) {
       return instance.addProposal.call('Unit Test Proposal');
-    }).then(function(data) {
+    })
+    .then(function(data) {
       assert.equal(data, true, "Error on add Proposal");
     });
 
@@ -15,11 +16,13 @@ contract('Voting', function(accounts) {
   it("Vote a proposal", function() {
     var votingInstance;
 
-    return web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-      var account = accounts[0];
+    // return web3.eth.getAccounts(function(error, accounts) {
+    //   if (error) {
+    //     console.log(error);
+    //   }
+    //   var account = accounts[0];
+
+    var account = "0x79D4f414d25C12A6F6325D430F0107688490e455";
 
       return Voting.deployed().then(function(instance) {
         votingInstance = instance;
@@ -27,13 +30,13 @@ contract('Voting', function(accounts) {
       })
 
       .then(function(data) {
-        return votingInstance.vote.call(0, 1, {from: account});
+        return votingInstance.vote.call(0, 1, {from: account, gas: 4712388});
       })
       
       .then(function(data) {
         assert.equal(data, true, "Error voting on proposal");
       });
     });
-  });
+  // });
 
 });
