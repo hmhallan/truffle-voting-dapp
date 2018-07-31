@@ -14,28 +14,22 @@ contract('Voting', function(accounts) {
   });
 
   it("Vote a proposal", function() {
-    var votingInstance;
+    var v;
+    var account = accounts[0];
 
-    return web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-      var account = accounts[0];
+    return Voting.deployed()
+    
+    .then(function(instance) {
+      v = instance;
+      return v.addProposal('Unit Test First Proposal');
+    })
 
-      return Voting.deployed()
-      
-      .then(function(instance) {
-        votingInstance = instance;
-        return votingInstance.addProposal('Unit Test First Proposal');
-      })
-
-      .then(function(data) {
-        return votingInstance.vote.call(0, 1, {from: account, gas: 4712388});
-      })
-      
-      .then(function(data) {
-        assert.equal(data, true, "Error voting on proposal");
-      });
+    .then(function(data) {
+      return v.vote.call(0, 1, {from: account, gas: 4712388});
+    })
+    
+    .then(function(data) {
+      assert.equal(data, true, "Error voting on proposal");
     });
   });
 
