@@ -16,17 +16,17 @@ contract('Voting', function(accounts) {
   it("Vote a proposal", function() {
     var votingInstance;
 
-    // return web3.eth.getAccounts(function(error, accounts) {
-    //   if (error) {
-    //     console.log(error);
-    //   }
-    //   var account = accounts[0];
+    return web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+      var account = accounts[0];
 
-    var account = "0x79D4f414d25C12A6F6325D430F0107688490e455";
-
-      return Voting.deployed().then(function(instance) {
+      return Voting.deployed()
+      
+      .then(function(instance) {
         votingInstance = instance;
-        return votingInstance.addProposal.call('Unit Test Second Proposal');
+        return votingInstance.addProposal('Unit Test First Proposal');
       })
 
       .then(function(data) {
@@ -37,6 +37,6 @@ contract('Voting', function(accounts) {
         assert.equal(data, true, "Error voting on proposal");
       });
     });
-  // });
+  });
 
 });
