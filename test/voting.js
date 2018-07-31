@@ -2,6 +2,35 @@ var Voting = artifacts.require("Voting");
 
 contract('Voting', function(accounts) {
 
+  var v1;
+
+  before(function() {
+    console.info("before");
+      // runs before all tests in this block
+
+      return Voting.deployed()
+    
+      .then(function(instance) {
+        v1 = instance;
+      });
+
+  });
+
+  beforeEach(function() {
+    // runs before each test in this block
+    console.info("before each");
+  });
+
+  after(function() {
+    console.info("after");
+    // runs after all tests in this block
+  });
+
+  afterEach(function() {
+    console.info("after each");
+    // runs after each test in this block
+  });
+
   it("Add a proposal", function() {
 
     return Voting.deployed().then(function(instance) {
@@ -14,18 +43,12 @@ contract('Voting', function(accounts) {
   });
 
   it("Vote a proposal", function() {
-    var v;
     var account = accounts[0];
 
-    return Voting.deployed()
+    return v1.addProposal('Unit Test First Proposal')
     
-    .then(function(instance) {
-      v = instance;
-      return v.addProposal('Unit Test First Proposal');
-    })
-
     .then(function(data) {
-      return v.vote.call(0, 1, {from: account, gas: 4712388});
+      return v1.vote.call(0, 1, {from: account, gas: 4712388});
     })
     
     .then(function(data) {
